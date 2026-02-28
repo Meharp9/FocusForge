@@ -8,8 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "FocusGarden",
-  description: "Grow your focus. One session at a time.",
+  title: "FocusForge",
+  description: "Level up your productivity",
 };
 
 export default function RootLayout({
