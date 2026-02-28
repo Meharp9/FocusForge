@@ -9,7 +9,9 @@ const Navbar = () => {
       <Logo />
       <div className='flex gap-3'>
         <ThemeToggle />
-        <Button btnText='Login' />
+        <Button 
+          btnText='Login'
+        />
       </div>
     </div>
   )
