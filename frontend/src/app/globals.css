@@ -1,21 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #ffffff;
+  --color-background: #fdfcf8;
+  --color-foreground: #2d3436;
   --color-primary: #69d392;
   --color-secondary: #ffc0cb;
   --color-heading: #2d3436;
   --color-muted: #636e72;
   
   --radius: 12px;
+  
+  --color-gradient-primary-from: #34d399;
+  --color-gradient-primary-to: #8b5cf6;
 }
 
 .dark {
   --color-background: #0f172a;
-  --color-primary: #0f6cf2;
+  --color-foreground: #f8fafc;
+  --color-primary: #34d399;
   --color-secondary: #ff8bb0;
   --color-heading: #f0f0f0;
   --color-muted: #93A2B7;
+  
+  --color-gradient-primary-from: #34d399;
+  --color-gradient-primary-to: #8b5cf6;
 }
 
 body {
@@ -23,4 +31,28 @@ body {
   color: var(--color-heading);
   font-family: "Host Grotesk", sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bg-gradient-primary {
+  background-image: linear-gradient(135deg, var(--color-gradient-primary-from), var(--color-gradient-primary-to));
+}
+
+.border-gradient-primary {
+  border: 1px solid transparent;
+  background-image: 
+    linear-gradient(var(--color-background), var(--color-background)),
+    linear-gradient(135deg, var(--color-gradient-primary-from), var(--color-gradient-primary-to));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  position: relative;
+}
+
+.border-gradient-primary:hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--color-gradient-primary-from), var(--color-gradient-primary-to));
+  opacity: 0.2;
+  pointer-events: none;
 }

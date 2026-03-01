@@ -17,7 +17,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setDarkMode(!darkMode)}
-      className="p-1.5 cursor-pointer rounded-xl border border-gray-300 dark:border-primary transition hover:bg-primary/50"
+      className="p-1.5 cursor-pointer rounded-full transition hover:bg-primary/10 text-heading"
     >
       {darkMode ? 
         <Moon size={23}/> : 

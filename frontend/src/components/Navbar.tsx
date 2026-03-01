@@ -5,12 +5,12 @@ import ThemeToggle from './ThemeToggle'
 
 const Navbar = () => {
   return (
-    <div className='flex justify-between px-50 py-4 shadow-sm shadow-white/10'>
+    <div className='flex justify-between px-50 py-4 shadow-sm shadow-muted/10'>
       <Logo />
       <div className='flex gap-3'>
         <ThemeToggle />
         <Button 
-          btnText='Login'
+          btnText='Get Started'
         />
       </div>
     </div>
