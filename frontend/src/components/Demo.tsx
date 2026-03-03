@@ -31,7 +31,10 @@ const Demo = () => {
   }, [direction]);
 
   return (
-    <Card>
+    <Card 
+      hoverEffects="transform transition-transform hover:scale-[1.02]"
+      className="shadow-[0_20px_60px_rgba(52,211,153,0.3),0_10px_30px_rgba(52,211,153,0.2),0_0_1px_rgba(255,255,255,0.2)_inset]"
+    >
       <div className='flex items-center gap-4'>
         <div className='bg-gradient-primary rounded-lg p-2 font-black text-xl'>
           42

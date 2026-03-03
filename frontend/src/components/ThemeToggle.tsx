@@ -20,8 +20,8 @@ export default function ThemeToggle() {
       className="p-1.5 cursor-pointer rounded-full transition hover:bg-primary/10 text-heading"
     >
       {darkMode ? 
-        <Moon size={23}/> : 
-        <Sun size={23}/>
+        <Sun size={23}/> : 
+        <Moon size={23}/>
       }
     </button>
   );
