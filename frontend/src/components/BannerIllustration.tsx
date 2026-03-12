@@ -6,10 +6,10 @@ const BannerIllustration = () => {
   const features = [
     { icon: Clock, label: 'Focus', bg: 'bg-blue-400/10', color: 'text-blue-400', position: 'top-[15%] left-[20%]', delay: '0s' },
     { icon: TrendingUp, label: 'Stats', bg: 'bg-purple-400/10', color: 'text-purple-400', position: 'top-[15%] right-[20%]', delay: '0.5s' },
-    { icon: Target, label: 'Quests', bg: 'bg-orange-400/10', color: 'text-orange-400', position: 'top-[45%] right-[8%]', delay: '1s' },
+    { icon: Target, label: 'Quests', bg: 'bg-orange-400/10', color: 'text-orange-400', position: 'top-[45%] right-[10%]', delay: '1s' },
     { icon: Flame, label: 'Streaks', bg: 'bg-red-400/10', color: 'text-red-400', position: 'bottom-[5%] right-[25%]', delay: '1.5s' },
     { icon: Zap, label: 'XP', bg: 'bg-orange-400/10', color: 'text-orange-400', position: 'bottom-[5%] left-[25%]', delay: '2s' },
-    { icon: Trophy, label: 'Achieve', bg: 'bg-orange-400/10', color: 'text-orange-400', position: 'top-[45%] left-[8%]', delay: '2.5s' },
+    { icon: Trophy, label: 'Achieve', bg: 'bg-orange-400/10', color: 'text-orange-400', position: 'top-[45%] left-[10%]', delay: '2.5s' },
   ]
 
   return (
@@ -31,7 +31,7 @@ const BannerIllustration = () => {
       <div className="absolute z-0 w-20 h-20 rounded-3xl border-2 border-orange-500/10 animate-ping-slow" style={{ animationDelay: '2s' }} />
 
       {/* Central flame card */}
-      <div className="relative z-10 p-4 rounded-3xl bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center shadow-[0_0_60px_rgba(251,146,60,0.5)]">
+      <div className="text-white relative z-10 p-4 rounded-3xl bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center shadow-[0_0_60px_rgba(251,146,60,0.5)]">
         <Swords size={50} strokeWidth={2.5} />
       </div>
 

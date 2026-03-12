@@ -8,7 +8,7 @@ interface CardProps {
 
 const Card = ({children, className = '', hoverEffects = ''}: CardProps) => {
   return (
-    <div className={`bg-white/5 border border-white/20 rounded-3xl py-6 px-10 backdrop-blur-sm ${hoverEffects} ${className}`}>
+    <div className={`bg-white/5 border border-slate-700/30 rounded-3xl py-6 px-10 backdrop-blur-sm ${hoverEffects} ${className}`}>
       {children}
     </div>
   )
