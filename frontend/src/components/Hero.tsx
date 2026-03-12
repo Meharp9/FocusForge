@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './common/Button'
-import Demo from './Demo'
 import { Sparkles } from 'lucide-react'
+import BannerIllustration from './BannerIllustration'
 
 const Hero = () => {
   return (
@@ -32,7 +32,7 @@ const Hero = () => {
           />
         </div>
       </div>
-      <Demo />
+      <BannerIllustration />
     </div>
   )
 }

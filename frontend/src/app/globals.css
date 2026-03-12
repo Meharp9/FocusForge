@@ -1,31 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #fdfcf8;
+  --color-background: hsl(220 15% 96%);
   --color-foreground: #2d3436;
-  --color-primary: #69d392;
+  --color-primary: hsl(28 85% 55%);
   --color-secondary: #ffc0cb;
   --color-tertiary: #a78bfa;
   --color-heading: #2d3436;
   --color-muted: #636e72;
   
   --radius: 12px;
-  
-  --color-gradient-primary-from: #34d399;
+
   --color-gradient-primary-to: #8b5cf6;
+  --color-forge-ember: hsl(15 85% 50%);
 }
 
 .dark {
-  --color-background: #0f172a;
+  --color-background: hsl(220 25% 8%);
   --color-foreground: #f8fafc;
-  --color-primary: #34d399;
+  --color-primary: hsl(28 85% 55%);
   --color-secondary: #ff8bb0;
   --color-tertiary: #a78bfa;
   --color-heading: #f0f0f0;
   --color-muted: #93A2B7;
-  
-  --color-gradient-primary-from: #34d399;
+
   --color-gradient-primary-to: #8b5cf6;
+  --color-forge-ember: hsl(15 85% 55%);
 }
 
 body {
@@ -36,14 +36,14 @@ body {
 }
 
 .bg-gradient-primary {
-  background-image: linear-gradient(135deg, var(--color-gradient-primary-from), var(--color-gradient-primary-to));
+  background-image: linear-gradient(135deg, var(--color-primary), var(--color-forge-ember));
 }
 
 .border-gradient-primary {
   border: 1px solid transparent;
   background-image: 
     linear-gradient(var(--color-background), var(--color-background)),
-    linear-gradient(135deg, var(--color-gradient-primary-from), var(--color-gradient-primary-to));
+    linear-gradient(135deg, var(--color-primary), var(--color-forge-ember));
   background-origin: border-box;
   background-clip: padding-box, border-box;
   position: relative;
@@ -57,4 +57,32 @@ body {
   background: linear-gradient(135deg, var(--color-gradient-primary-from), var(--color-gradient-primary-to));
   opacity: 0.2;
   pointer-events: none;
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+@keyframes ping-slow {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75%, 100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.animate-ping-slow {
+  animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
