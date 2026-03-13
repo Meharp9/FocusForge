@@ -86,3 +86,23 @@ body {
 .animate-ping-slow {
   animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
+
+/* Hide scrollbar for mobile carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth scroll behavior */
+.snap-x {
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.snap-center {
+  scroll-snap-align: center;
+}

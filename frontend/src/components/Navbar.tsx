@@ -5,9 +5,9 @@ import ThemeToggle from './ThemeToggle'
 
 const Navbar = () => {
   return (
-    <div className='sticky top-0 z-50 flex justify-between px-15 py-4 shadow-sm shadow-muted/10 backdrop-blur-sm bg-background/80'>
+    <div className='sticky top-0 z-50 flex justify-between px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-3 md:py-4 shadow-sm shadow-muted/10 backdrop-blur-sm bg-background/80'>
       <Logo />
-      <div className='flex gap-3'>
+      <div className='flex gap-2 md:gap-3'>
         <ThemeToggle />
         <Button 
           btnText='Get Started'
