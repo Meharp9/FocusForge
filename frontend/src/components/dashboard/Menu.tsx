@@ -1,12 +1,15 @@
 'use client';
 
-import React, { useState } from 'react'
 import MenuItem from './MenuItem'
+import { useRouter, usePathname } from 'next/navigation';
 
 const MenuItems = ['Overview', 'Daily Quests', 'Pomodoro', 'Time Blocks', 'Habits', 'Stats', 'Achievements' ]
 
 const Menu = () => {
-  const [activeTab, setActiveTab] = useState('overview');
+  const router = useRouter();
+  const pathname = usePathname();
+  const match = pathname.match(/^\/dashboard\/(.+)$/);
+  const activeTab = match ? match[1] : 'overview';
 
   return (
     <div className='px-3 flex flex-col gap-2'>
@@ -18,7 +21,7 @@ const Menu = () => {
           key={item} 
           label={item} 
           isActive={isActive} 
-          onClick={() => setActiveTab(tabName)} 
+          onClick={() => router.push(`dashboard/${tabName}`)} 
         />
       })}
     </div>
