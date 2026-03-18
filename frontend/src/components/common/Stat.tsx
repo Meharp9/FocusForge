@@ -1,18 +1,15 @@
 import React from 'react'
 
 interface StatProps {
-  count: string;
-  title: string;
-  color?: 'primary' | 'secondary' | 'tertiary';
+  value: string;
+  label: string;
 }
 
-const Stat = ({count, title, color = 'primary'}: StatProps) => {
-  const colorClass = color === 'primary' ? 'text-primary' : color === 'secondary' ? 'text-secondary' : 'text-tertiary';
-  
+const Stat = ({value, label}: StatProps) => {
   return (
     <div className='flex flex-col justify-center items-center text-sm'>
-      <h3 className={`font-bold text-xl ${colorClass}`}>{count}</h3>
-      <p className='text-muted'>{title}</p>
+      <h3 className='font-bold text-xl'>{value}</h3>
+      <p className='text-muted'>{label}</p>
     </div>
   )
 }
