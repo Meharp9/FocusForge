@@ -1,7 +1,6 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import React from 'react'
 import ThemeToggle from '../ThemeToggle';
 import LevelTag from '../common/LevelTag';
 
