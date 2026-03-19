@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   --color-background: hsl(220 15% 96%);
@@ -8,6 +9,8 @@
   --color-tertiary: #a78bfa;
   --color-heading: #2d3436;
   --color-muted: #636e72;
+  --color-sidebar: #fdfdfe;
+  --color-rust: #98551b;
   
   --radius: 12px;
 
@@ -23,6 +26,8 @@
   --color-tertiary: #a78bfa;
   --color-heading: #f0f0f0;
   --color-muted: #93A2B7;
+  --color-sidebar: #191c26;
+  --color-rust: #e4a267;
 
   --color-gradient-primary-to: #8b5cf6;
   --color-forge-ember: hsl(15 85% 55%);
