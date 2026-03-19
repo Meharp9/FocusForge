@@ -1,5 +1,5 @@
 import { ArrowLeft } from 'lucide-react';
-import ThemeToggle from '../ThemeToggle';
+import ThemeToggle from '@/components/ThemeToggle';
 import SignUpForm from './SignUpForm';
 
 interface SignUpProps {

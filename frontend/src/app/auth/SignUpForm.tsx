@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import InputField from '../common/InputField'
-import Button from '../common/Button';
+import InputField from '@/components/common/InputField';
+import Button from '@/components/common/Button';
 
 interface SignUpFormProps {
   switchPage: () => void;

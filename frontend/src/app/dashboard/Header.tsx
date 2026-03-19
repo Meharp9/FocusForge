@@ -1,8 +1,8 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import ThemeToggle from '../ThemeToggle';
-import LevelTag from '../common/LevelTag';
+import ThemeToggle from '../../components/ThemeToggle';
+import LevelTag from '../../components/common/LevelTag';
 
 const Header = () => {
   const pathname = usePathname();

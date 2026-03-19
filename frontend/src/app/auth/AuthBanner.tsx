@@ -1,7 +1,6 @@
-import React from 'react'
-import Logo from '../common/Logo'
-import { Copyright } from 'lucide-react'
-import Step from '../common/Step'
+import Logo from '@/components/common/Logo';
+import Step from '@/components/common/Step';
+import { Copyright } from 'lucide-react';
 
 const authStats = [
   {

@@ -1,6 +1,5 @@
-import React from 'react'
 import SignInForm from './SignInForm';
-import ThemeToggle from '../ThemeToggle';
+import ThemeToggle from '@/components/ThemeToggle';
 import { ArrowLeft } from 'lucide-react';
 
 interface SignInProps {
