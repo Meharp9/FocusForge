@@ -2,26 +2,27 @@ import { Eye, EyeClosed } from 'lucide-react';
 import React from 'react'
 
 interface InputFieldProps {
-  label: string;
+  label?: string;
   type: string;
   value: string;
   placeholder?: string;
+  className?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputField = ({ label, type, value, placeholder, onChange }: InputFieldProps) => {
+const InputField = ({ label, type, value, placeholder, className, onChange }: InputFieldProps) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const isPasswordType = type === 'password';
   return (
-    <div className='flex flex-col gap-1 relative'>
-      <label>{label}</label>
+    <div className={`flex flex-col gap-1 relative ${className}`}>
+      {label && <label>{label}</label>}
       <div className='relative'>
         <input 
           type={isPasswordType && !showPassword ? 'password' : 'text'}
           value={value} 
           placeholder={placeholder} 
           onChange={onChange} 
-          className='border border-gray-300 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-primary transition bg-transparent w-full pr-10' 
+          className='border border-gray-300 focus:border-transparent rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-primary transition bg-transparent w-full pr-10' 
         />
         {isPasswordType && (
           <button
