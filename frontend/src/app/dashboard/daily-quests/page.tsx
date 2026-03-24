@@ -2,7 +2,7 @@
 import XPTracker from '@/components/XPTracker';
 import Header from '../Header';
 import Sidebar from '../Sidebar';
-import DailyQuests from '@/components/DailyQuests';
+import DailyQuests from '@/app/dashboard/daily-quests/DailyQuests';
 
 const DailyQuestsPage = () => {
   return (
@@ -10,7 +10,7 @@ const DailyQuestsPage = () => {
       <Sidebar />
       <div className='flex-grow flex flex-col gap-4'>
         <Header />
-        <div className='p-6 flex flex-col gap-6'>
+        <div className='p-6 flex flex-col gap-6 w-[90%] self-center'>
           <XPTracker />
           <DailyQuests />
         </div>
