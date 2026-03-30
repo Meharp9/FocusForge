@@ -2,7 +2,7 @@ import React from 'react'
 
 interface TaskCardProps {
   title: string;
-  type: 'personal' | 'work';
+  type?: 'personal' | 'work';
 }
 
 const TaskCard = ({ title, type }: TaskCardProps) => {
