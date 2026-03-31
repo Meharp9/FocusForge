@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.models.user import User
+from app.models.user import User, UserInfo
 from app.core.deps import get_db
 from app.core.security import hash_password, verify_password
 from app.core.auth import create_access_token
@@ -18,9 +18,14 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
     hashed_password = hash_password(user.password)
       
     new_user = User(email=user.email, password=hashed_password)
+    
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
+
+    new_user_info = UserInfo(user_id=new_user.id, level=1, xp_earned=0)
+    db.add(new_user_info)
+    db.commit()
 
     # Create JWT token
     token = create_access_token({"sub": new_user.email})
