@@ -38,8 +38,8 @@ const TimerControls: React.FC<TimerControlsProps> = ({
 
       <button
         onClick={onReset}
-        className="flex items-center justify-center w-10 h-10 rounded-full bg-[#2a2d38]
-          hover:bg-[#33374a] active:scale-95 text-gray-300 transition-all duration-150"
+        className="flex items-center justify-center w-10 h-10 rounded-full bg-input
+          hover:bg-surface active:scale-95 text-muted transition-all duration-150"
         aria-label="Reset timer"
       >
         <svg

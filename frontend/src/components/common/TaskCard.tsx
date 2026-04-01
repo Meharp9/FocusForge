@@ -7,7 +7,7 @@ interface TaskCardProps {
 
 const TaskCard = ({ title, type }: TaskCardProps) => {
   return (
-    <div className='flex justify-between items-center p-3 rounded-2xl mb-2 border border-muted/20 hover:border-primary/40'>
+    <div className='flex justify-between items-center p-3 rounded-2xl mb-2 border border-border hover:border-primary/40'>
       <div className='flex gap-4 items-center'>
         <input type='radio' name='task' id={title} className='bg-transparent' />
         {title}

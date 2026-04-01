@@ -22,7 +22,7 @@ const InputField = ({ label, type, value, placeholder, className, onChange }: In
           value={value} 
           placeholder={placeholder} 
           onChange={onChange} 
-          className='border border-gray-300 focus:border-transparent rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-primary transition bg-transparent w-full pr-10' 
+          className='border border-border focus:border-transparent rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-primary transition bg-input w-full pr-10' 
         />
         {isPasswordType && (
           <button

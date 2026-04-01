@@ -43,10 +43,10 @@ const DailyQuests = () => {
           className='flex-grow'
         />
         <div className='flex items-center gap-2'>
-          <div className={`p-3 rounded cursor-pointer ${taskType === 'personal' ? 'bg-primary' : 'border border-black dark:border-white'}`} onClick={() => setTaskType('personal')}>
+          <div className={`p-3 rounded cursor-pointer ${taskType === 'personal' ? 'bg-primary' : 'border border-border'}`} onClick={() => setTaskType('personal')}>
             <User size={20} />
           </div>
-          <div className={`p-3 rounded cursor-pointer ${taskType === 'work' ? 'bg-primary' : 'border border-black dark:border-white'}`} onClick={() => setTaskType('work')}>
+          <div className={`p-3 rounded cursor-pointer ${taskType === 'work' ? 'bg-primary' : 'border border-border'}`} onClick={() => setTaskType('work')}>
             <Briefcase size={20} />
           </div>
         </div>

@@ -4,14 +4,17 @@
 @theme {
   --color-background: hsl(220 15% 96%);
   --color-foreground: #2d3436;
-  --color-primary: hsl(28 85% 55%);
+  --color-primary: hsl(28 80% 52%);
   --color-secondary: #ffc0cb;
   --color-tertiary: #a78bfa;
   --color-heading: #2d3436;
   --color-muted: #636e72;
   --color-sidebar: #fdfdfe;
+  --color-surface: #f0f1f4;
+  --color-border: #e2e5ea;
   --color-rust: #98551b;
-  
+  --color-input: #ffffff;
+
   --radius: 12px;
 
   --color-gradient-primary-to: #8b5cf6;
@@ -19,15 +22,18 @@
 }
 
 .dark {
-  --color-background: hsl(220 25% 8%);
+  --color-background: #111318;
   --color-foreground: #f8fafc;
-  --color-primary: hsl(28 85% 55%);
+  --color-primary: hsl(28 80% 52%);
   --color-secondary: #ff8bb0;
   --color-tertiary: #a78bfa;
   --color-heading: #f0f0f0;
-  --color-muted: #93A2B7;
-  --color-sidebar: #191c26;
+  --color-muted: #8b95a5;
+  --color-sidebar: #0d0f15;
+  --color-surface: #16181f;
+  --color-border: rgba(255, 255, 255, 0.08);
   --color-rust: #e4a267;
+  --color-input: #1a1c25;
 
   --color-gradient-primary-to: #8b5cf6;
   --color-forge-ember: hsl(15 85% 55%);
@@ -46,7 +52,7 @@ body {
 
 .border-gradient-primary {
   border: 1px solid transparent;
-  background-image: 
+  background-image:
     linear-gradient(var(--color-background), var(--color-background)),
     linear-gradient(135deg, var(--color-primary), var(--color-forge-ember));
   background-origin: border-box;

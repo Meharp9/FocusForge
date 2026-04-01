@@ -7,7 +7,7 @@ const XPTracker = () => {
     <SoftCard className='flex flex-col gap-4'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-3'>
-          <div className='bg-primary px-4 py-1.5 w-max rounded-xl shadow-[0px_0px_5px_2px] shadow-primary/30 font-bold lg:text-lg'>
+          <div className='bg-primary text-white px-4 py-1.5 w-max rounded-xl shadow-[0px_0px_5px_2px] shadow-primary/30 font-bold lg:text-lg'>
             1
           </div>
           <div>
@@ -25,7 +25,7 @@ const XPTracker = () => {
       </div>
       <div className="flex-grow h-3 bg-muted/10 rounded-full overflow-hidden">
         <div 
-          className="h-full bg-[#e67e22] rounded-full transition-all duration-500 ease-out"
+          className="h-full bg-primary rounded-full transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
         />
       </div>
