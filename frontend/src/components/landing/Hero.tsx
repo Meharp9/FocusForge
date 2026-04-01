@@ -1,7 +1,7 @@
 import React from 'react'
-import Button from './common/Button'
+import Button from '@/components/common/Button'
 import { Sparkles } from 'lucide-react'
-import BannerIllustration from './BannerIllustration'
+import BannerIllustration from '@/components/landing/BannerIllustration'
 
 const Hero = () => {
   return (
@@ -22,8 +22,8 @@ const Hero = () => {
           Transform your daily tasks into epic quests. Build unstoppable habits. Earn XP for every achievement. FocusForge turns productivity into an adventure worth taking.
         </p>
         <div className='flex gap-3 md:gap-4 mt-2 md:mt-4'>
-          <Button 
-            btnText='Start Forging' 
+          <Button
+            btnText='Start Forging'
             className='py-2 md:py-2.5'
             showArrow={true}
           />

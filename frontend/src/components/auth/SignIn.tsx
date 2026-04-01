@@ -1,4 +1,4 @@
-import SignInForm from './SignInForm';
+import SignInForm from '@/components/auth/SignInForm';
 import ThemeToggle from '@/components/ThemeToggle';
 import { ArrowLeft } from 'lucide-react';
 

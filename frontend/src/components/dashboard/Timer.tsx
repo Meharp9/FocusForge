@@ -1,21 +1,18 @@
 'use client'
-import React, { useState } from 'react'
+
 import SoftCard from '@/components/common/SoftCard'
-import { usePomodoro } from './UsePomodor'
-import TimerToggle from './TimerToggle'
-import TimerDisplay from './TimerDisplay'
-import { TimerControls } from './TimerControls'
+import { usePomodoro } from '@/hooks/usePomodoro'
+import TimerToggle from '@/components/dashboard/TimerToggle'
+import TimerDisplay from '@/components/dashboard/TimerDisplay'
+import TimerControls from '@/components/dashboard/TimerControls'
+import { DEFAULT_TIMER_CONFIG } from '@/constants/timer'
 
 const Timer = () => {
-  const config = {
-    focusDuration: 25 * 60,
-    breakDuration: 5 * 60,
-  }
-  const { state, start, pause, reset, switchMode } = usePomodoro(config);
+  const { state, start, pause, reset, switchMode } = usePomodoro(DEFAULT_TIMER_CONFIG);
 
   const totalSeconds =
-    state.mode === 'focus' ? config.focusDuration : config.breakDuration;
-  
+    state.mode === 'focus' ? DEFAULT_TIMER_CONFIG.focusDuration : DEFAULT_TIMER_CONFIG.breakDuration;
+
   return (
     <SoftCard className='flex flex-col p-4 gap-6'>
       <div className="flex items-start justify-between">

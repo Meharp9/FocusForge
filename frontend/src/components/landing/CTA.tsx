@@ -1,6 +1,6 @@
 import React from 'react'
-import Card from './common/Card'
-import Button from './common/Button'
+import Card from '@/components/common/Card'
+import Button from '@/components/common/Button'
 
 const CTA = () => {
   return (
@@ -11,14 +11,14 @@ const CTA = () => {
             <span>Ready to</span>
             <span className='bg-gradient-primary bg-clip-text text-transparent'>
               Forge
-            </span> 
+            </span>
             <span>Your Productivity?</span>
           </h2>
           <p className='text-muted w-full sm:w-[85%] md:w-[75%] lg:w-[70%] text-center text-sm sm:text-base md:text-lg'>
             Join focused individuals who&apos;ve turned their daily grind into a rewarding adventure.
           </p>
         </div>
-        <Button 
+        <Button
           btnText='Get Started Free'
           className='text-white py-2 md:py-2.5 mt-3 md:mt-4 lg:mt-6'
           showArrow={true}

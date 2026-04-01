@@ -22,21 +22,21 @@ const SignUpForm = ({ switchPage }: SignUpFormProps) => {
         </p>
       </div>
       <div className='flex flex-col gap-3'>
-        <InputField 
+        <InputField
           label="Email"
           type="email"
           value={email}
           placeholder="you@example.com"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <InputField 
+        <InputField
           label="Password"
           type="password"
           value={password}
           placeholder="********"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <InputField 
+        <InputField
           label="Confirm Password"
           type="password"
           value={confirmPassword}

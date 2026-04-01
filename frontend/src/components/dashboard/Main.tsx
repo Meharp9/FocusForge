@@ -1,4 +1,3 @@
-import SoftCard from '@/components/common/SoftCard'
 import XPTracker from '@/components/XPTracker'
 
 const Main = () => {

@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-const taskOptions = ["All", "Personal", "Work"]
+import { TASK_FILTER_OPTIONS } from '@/constants/tasks';
 
 const TaskToggle = ({ onSwitchList }: { onSwitchList: (option: string) => void }) => {
   const [activeOption, setActiveOption] = useState("All");
@@ -12,14 +11,11 @@ const TaskToggle = ({ onSwitchList }: { onSwitchList: (option: string) => void }
 
   return (
     <div className='flex items-center bg-muted/10 rounded p-0.5 text-xs'>
-      {taskOptions.map((option, index) => (
-        <div 
+      {TASK_FILTER_OPTIONS.map((option, index) => (
+        <div
           key={index}
           className={`px-3 py-1 rounded-[0.5rem] cursor-pointer font-semibold ${activeOption === option ? 'bg-background' : ''}`}
-          onClick={() => {
-            handleOptionClick(option);
-            onSwitchList(option.toLowerCase());
-          }}
+          onClick={() => handleOptionClick(option)}
         >
           {option}
         </div>

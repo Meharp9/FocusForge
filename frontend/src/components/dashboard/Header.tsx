@@ -1,19 +1,14 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import ThemeToggle from '../../components/ThemeToggle';
-import LevelTag from '../../components/common/LevelTag';
+import ThemeToggle from '@/components/ThemeToggle';
+import LevelTag from '@/components/common/LevelTag';
+import { toTitleCase } from '@/utils/formatting';
 
 const Header = () => {
   const pathname = usePathname();
   const match = pathname.match(/^\/dashboard\/(.+)$/);
   const activeTab = match ? match[1] : 'overview';
-  
-  const toTitleCase = (str: string) =>
-    str
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
   const tabName = toTitleCase(activeTab);
 
   return (

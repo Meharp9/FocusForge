@@ -1,23 +1,18 @@
-import SoftCard from '../../../components/common/SoftCard'
-import TaskToggle from '@/app/dashboard/daily-quests/TaskToggle'
-import InputField from '../../../components/common/InputField'
+import SoftCard from '@/components/common/SoftCard'
+import TaskToggle from '@/components/dashboard/TaskToggle'
+import InputField from '@/components/common/InputField'
 import { Briefcase, Plus, User } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import TaskCard from '@/components/common/TaskCard'
-
-interface Task {
-  id: number;
-  title: string;
-  type: 'personal' | 'work';
-}
+import { Task, TaskFilter } from '@/types/tasks'
 
 const DailyQuests = () => {
   const [taskList, setTaskList] = useState<Task[]>([]);
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
-  const [listType, setListType] = useState('all');
+  const [listType, setListType] = useState<TaskFilter>('all');
   const [taskInput, setTaskInput] = useState('');
   const [taskType, setTaskType] = useState<'personal' | 'work'>('personal');
-  
+
   useEffect(() => {
     if (listType === 'all') {
       setFilteredTasks(taskList);
@@ -25,8 +20,6 @@ const DailyQuests = () => {
       setFilteredTasks(taskList.filter((task) => task.type === listType));
     }
   }, [taskList, listType]);
-
-  console.log(filteredTasks);
 
   return (
     <SoftCard className='flex flex-col p-4 gap-6'>
@@ -39,10 +32,10 @@ const DailyQuests = () => {
             0/0 completed
           </p>
         </div>
-        <TaskToggle onSwitchList={(option) => setListType(option)} />
+        <TaskToggle onSwitchList={(option) => setListType(option as TaskFilter)} />
       </div>
       <div className='flex items-center gap-3'>
-        <InputField 
+        <InputField
           type="text"
           value={taskInput}
           placeholder="Add a new quest...."

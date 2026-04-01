@@ -1,15 +1,10 @@
 import React from 'react';
+import { formatTime } from '@/utils/formatting';
 
 interface TimerDisplayProps {
   secondsLeft: number;
   totalSeconds: number;
   mode: 'focus' | 'break';
-}
-
-function formatTime(seconds: number): string {
-  const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-  const s = (seconds % 60).toString().padStart(2, '0');
-  return `${m}:${s}`;
 }
 
 const TimerDisplay: React.FC<TimerDisplayProps> = ({
@@ -24,7 +19,6 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
 
   return (
     <div className="relative flex items-center justify-center w-72 h-72">
-      {/* Background track circle */}
       <svg
         className="absolute inset-0 w-full h-full -rotate-90"
         viewBox="0 0 280 280"
@@ -51,10 +45,8 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
         />
       </svg>
 
-      {/* Inner circle background */}
       <div className="absolute inset-4 rounded-full bg-[#1e2028]" />
 
-      {/* Time + label */}
       <div className="relative z-10 flex flex-col items-center gap-1">
         <span className="text-6xl font-bold text-white tracking-tight font-mono">
           {formatTime(secondsLeft)}

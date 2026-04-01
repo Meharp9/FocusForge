@@ -1,5 +1,5 @@
-import Logo from '../../components/common/Logo'
-import Menu from './Menu'
+import Logo from '@/components/common/Logo'
+import Menu from '@/components/dashboard/Menu'
 
 const Sidebar = () => {
   return (

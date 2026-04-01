@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from './common/Card'
+import Card from '@/components/common/Card'
 import { Flame, Target, Clock, Trophy, Zap, Shield } from 'lucide-react'
 
 const FEATURE_LIST = [
@@ -46,7 +46,7 @@ const Features = () => {
           Gamify your goals with powerful features designed to keep you motivated and engaged.
         </p>
       </div>
-      
+
       {/* Mobile Carousel */}
       <div className='md:hidden w-full overflow-x-auto scrollbar-hide'>
         <div className='flex gap-4 px-6 snap-x snap-mandatory'>
@@ -54,7 +54,7 @@ const Features = () => {
             const Icon = feature.icon
             return (
               <div key={index} className='snap-center shrink-0 w-[85vw] max-w-[340px]'>
-                <Card 
+                <Card
                   className="flex flex-col gap-3 h-full"
                 >
                   <div className={`bg-primary/10 rounded-lg p-2.5 w-fit`}>
@@ -74,7 +74,7 @@ const Features = () => {
         {FEATURE_LIST.map((feature, index) => {
           const Icon = feature.icon
           return (
-            <Card 
+            <Card
               key={index}
               hoverEffects="transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_1.25rem_2.5rem_rgba(0,0,0,0.5)]"
               className="flex flex-col gap-4"
@@ -92,8 +92,8 @@ const Features = () => {
       {/* Carousel Indicators */}
       <div className='flex md:hidden gap-2 mt-2'>
         {FEATURE_LIST.map((_, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className='w-2 h-2 rounded-full bg-primary/30'
           />
         ))}

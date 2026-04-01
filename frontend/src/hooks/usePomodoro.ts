@@ -1,24 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { TimerConfig, TimerState, Mode } from '@/types/timer';
+import { DEFAULT_TIMER_CONFIG } from '@/constants/timer';
 
-interface TimerConfig {
-  focusDuration: number;
-  breakDuration: number;
-}
-type Mode = 'focus' | 'break';
-
-interface TimerState {
-  mode: Mode;
-  secondsLeft: number;
-  isRunning: boolean;
-  sessionsCompleted: number;
-}
-
-const DEFAULT_CONFIG: TimerConfig = {
-  focusDuration: 25 * 60,
-  breakDuration: 5 * 60,
-};
-
-export function usePomodoro(config: TimerConfig = DEFAULT_CONFIG) {
+export function usePomodoro(config: TimerConfig = DEFAULT_TIMER_CONFIG) {
   const [state, setState] = useState<TimerState>({
     mode: 'focus',
     secondsLeft: config.focusDuration,

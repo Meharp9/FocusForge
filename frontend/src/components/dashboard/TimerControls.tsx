@@ -6,14 +6,13 @@ interface TimerControlsProps {
   onReset: () => void;
 }
 
-export const TimerControls: React.FC<TimerControlsProps> = ({
+const TimerControls: React.FC<TimerControlsProps> = ({
   isRunning,
   onStartPause,
   onReset,
 }) => {
   return (
     <div className="flex items-center gap-3">
-      {/* Start / Pause button */}
       <button
         onClick={onStartPause}
         className="flex items-center gap-2 px-5 py-2 bg-primary hover:bg-primary/80 active:scale-95
@@ -21,7 +20,6 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
       >
         {isRunning ? (
           <>
-            {/* Pause icon */}
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <rect x="6" y="4" width="4" height="16" rx="1" />
               <rect x="14" y="4" width="4" height="16" rx="1" />
@@ -30,7 +28,6 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
           </>
         ) : (
           <>
-            {/* Play icon */}
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5.14v14l11-7-11-7z" />
             </svg>
@@ -39,14 +36,12 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
         )}
       </button>
 
-      {/* Reset button */}
       <button
         onClick={onReset}
         className="flex items-center justify-center w-10 h-10 rounded-full bg-[#2a2d38]
           hover:bg-[#33374a] active:scale-95 text-gray-300 transition-all duration-150"
         aria-label="Reset timer"
       >
-        {/* Rotate-ccw icon */}
         <svg
           className="w-5 h-5"
           viewBox="0 0 24 24"
@@ -63,3 +58,5 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
     </div>
   );
 };
+
+export default TimerControls;

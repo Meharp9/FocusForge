@@ -1,10 +1,10 @@
 import React from 'react';
- 
+
 interface TimerToggleProps {
   mode: 'focus' | 'break';
   onSwitch: (mode: 'focus' | 'break') => void;
 }
- 
+
 const TimerToggle: React.FC<TimerToggleProps> = ({ mode, onSwitch }) => {
   return (
     <div className="flex items-center gap-1 bg-[#2a2d38] rounded-full p-1">

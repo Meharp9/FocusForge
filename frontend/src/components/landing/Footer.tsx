@@ -1,5 +1,4 @@
 import React from 'react'
-import Logo from './common/Logo'
 import { Copyright, Swords } from 'lucide-react'
 
 const Footer = () => {

@@ -1,6 +1,6 @@
 import { ArrowLeft } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
-import SignUpForm from './SignUpForm';
+import SignUpForm from '@/components/auth/SignUpForm';
 
 interface SignUpProps {
   onToggle: () => void;
@@ -8,7 +8,6 @@ interface SignUpProps {
 }
 
 const SignUp = ({ onToggle, onBack }: SignUpProps) => {
-  
   return (
     <div className='w-[50%] p-8 flex flex-col items-center'>
       <div className='flex items-center justify-between w-full'>

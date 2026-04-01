@@ -1,5 +1,5 @@
 import React from 'react'
-import Step from './common/Step'
+import Step from '@/components/common/Step'
 
 const Steps = [
   {
@@ -31,11 +31,11 @@ const HowItWorks = () => {
         </h2>
       </div>
       <div className='flex flex-col md:flex-row gap-8 md:gap-6 lg:gap-8 max-w-5xl'>
-        {Steps.map((step, index) => <Step 
-          key={index} 
+        {Steps.map((step, index) => <Step
+          key={index}
           index={index + 1}
-          title={step.title} 
-          description={step.description} 
+          title={step.title}
+          description={step.description}
         />)}
       </div>
     </div>

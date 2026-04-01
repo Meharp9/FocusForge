@@ -1,15 +1,14 @@
 'use client';
 
 import React from 'react'
-import Logo from './common/Logo'
-import Button from './common/Button'
-import ThemeToggle from './ThemeToggle'
+import Logo from '@/components/common/Logo'
+import Button from '@/components/common/Button'
+import ThemeToggle from '@/components/ThemeToggle'
 import { useRouter } from 'next/navigation';
-
 
 const Navbar = () => {
   const router = useRouter();
-  
+
   const handleGetStarted = () => {
     router.push("/auth");
   }
@@ -19,7 +18,7 @@ const Navbar = () => {
       <Logo />
       <div className='flex gap-2 md:gap-3'>
         <ThemeToggle />
-        <Button 
+        <Button
           btnText='Get Started'
           onClick={handleGetStarted}
         />
