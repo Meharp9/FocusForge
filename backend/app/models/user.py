@@ -5,13 +5,7 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True)
-    password = Column(String)
-
-class UserInfo(Base):
-    __tablename__ = "userInfo"
-
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer)
-    level = Column(Integer)
-    xp_earned = Column(Integer)
+    email = Column(String, unique=True, index=True, nullable=False)
+    password = Column(String, nullable=False)
+    level = Column(Integer, default=1)
+    xp_earned = Column(Integer, default=0)

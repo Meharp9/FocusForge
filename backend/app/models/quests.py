@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, Date, DateTime
+from sqlalchemy import Column, Integer, String, Boolean, Date, ForeignKey
 from app.core.database import Base
 from datetime import date
 
@@ -6,10 +6,10 @@ class Quest(Base):
     __tablename__ = "quests"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, nullable=False, index=True)
-    title = Column(String)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    title = Column(String, nullable=False)
     description = Column(String, nullable=True)
     xp_reward = Column(Integer, default=10)
     created_at = Column(Date, default=date.today)
     completed = Column(Boolean, default=False)
-    type = Column(String)
+    type = Column(String, nullable=False)
