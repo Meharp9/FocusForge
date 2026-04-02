@@ -36,6 +36,16 @@ export const signInApi = async (email: string, password: string) => {
   return data;
 };
 
+// Profile APIs
+export const fetchProfileApi = async () => {
+  const res = await fetch(`${API_URL}/user/profile`, {
+    headers: getAuthHeaders(),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to fetch profile.');
+  return data.profile;
+};
+
 // Quest APIs
 export const fetchQuestsApi = async () => {
   const res = await fetch(`${API_URL}/quests/list`, {

@@ -15,7 +15,6 @@ const TaskCard = ({ title, type, completed, xpReward, onComplete, onDelete }: Ta
       <div className='flex gap-4 items-center'>
         <button
           onClick={onComplete}
-          disabled={completed}
           className={`w-6 h-6 rounded-full border-2 flex items-center justify-center cursor-pointer ${completed ? 'border-primary bg-primary' : 'border-muted hover:border-primary'}`}
         >
           {completed && <Check size={14} />}
