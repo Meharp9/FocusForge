@@ -4,12 +4,13 @@ import React from 'react'
 import Card from '@/components/common/Card'
 import Button from '@/components/common/Button'
 import { useRouter } from 'next/navigation'
+import { useAppSelector } from '@/store/hooks'
 
 const CTA = () => {
   const router = useRouter();
+  const token = useAppSelector((state) => state.auth.token);
 
   const handleGetStarted = () => {
-    const token = localStorage.getItem("access_token");
     router.push(token ? "/dashboard" : "/auth");
   }
 

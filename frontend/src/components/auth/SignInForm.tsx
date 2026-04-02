@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import InputField from '@/components/common/InputField';
 import Button from '@/components/common/Button';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { signIn, clearError } from '@/store/slices/authSlice';
 
 interface SignInFormProps {
   switchPage: () => void;
@@ -9,42 +11,28 @@ interface SignInFormProps {
 
 const SignInForm = ({ switchPage }: SignInFormProps) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { loading, error: authError } = useAppSelector((state) => state.auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [validationError, setValidationError] = useState('');
 
   const handleSignIn = async () => {
-    setError('');
+    setValidationError('');
+    dispatch(clearError());
 
     if (!email || !password) {
-      setError('All fields are required.');
+      setValidationError('All fields are required.');
       return;
     }
 
-    setLoading(true);
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/signin`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data.success) {
-        setError(data.detail || data.error || 'Sign in failed.');
-        return;
-      }
-
-      localStorage.setItem('access_token', data.access_token);
+    const result = await dispatch(signIn({ email, password }));
+    if (signIn.fulfilled.match(result)) {
       router.push('/dashboard');
-    } catch {
-      setError('Unable to connect to server.');
-    } finally {
-      setLoading(false);
     }
   };
+
+  const error = validationError || authError;
 
   return (
     <div className='px-6 flex-grow flex flex-col gap-6 justify-center w-full lg:w-[70%]'>

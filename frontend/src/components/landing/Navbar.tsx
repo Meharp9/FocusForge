@@ -5,12 +5,13 @@ import Logo from '@/components/common/Logo'
 import Button from '@/components/common/Button'
 import ThemeToggle from '@/components/ThemeToggle'
 import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/store/hooks';
 
 const Navbar = () => {
   const router = useRouter();
+  const token = useAppSelector((state) => state.auth.token);
 
   const handleGetStarted = () => {
-    const token = localStorage.getItem("access_token");
     router.push(token ? "/dashboard" : "/auth");
   }
 

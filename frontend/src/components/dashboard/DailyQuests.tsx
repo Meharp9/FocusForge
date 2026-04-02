@@ -4,96 +4,32 @@ import InputField from '@/components/common/InputField'
 import { Briefcase, Plus, User } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import TaskCard from '@/components/common/TaskCard'
-import { Task, TaskFilter } from '@/types/tasks'
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('access_token');
-  return {
-    'Content-Type': 'application/json',
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-  };
-};
+import { TaskFilter } from '@/types/tasks'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { fetchQuests, addQuest, completeQuest, deleteQuest } from '@/store/slices/questSlice'
 
 const DailyQuests = () => {
-  const [taskList, setTaskList] = useState<Task[]>([]);
+  const dispatch = useAppDispatch();
+  const { quests } = useAppSelector((state) => state.quests);
   const [listType, setListType] = useState<TaskFilter>('all');
   const [taskInput, setTaskInput] = useState('');
   const [taskType, setTaskType] = useState<'personal' | 'work'>('personal');
 
-  const fetchQuests = async () => {
-    try {
-      const res = await fetch(`${API_URL}/quests/list`, {
-        headers: getAuthHeaders(),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setTaskList(data.quests);
-      }
-    } catch (err) {
-      console.error('Failed to fetch quests:', err);
-    }
-  };
-
   // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => { fetchQuests(); }, []);
+  useEffect(() => { dispatch(fetchQuests()); }, [dispatch]);
 
   const filteredTasks = useMemo(() => {
-    if (listType === 'all') return taskList;
-    return taskList.filter((task) => task.type === listType);
-  }, [taskList, listType]);
+    if (listType === 'all') return quests;
+    return quests.filter((task) => task.type === listType);
+  }, [quests, listType]);
 
-  const addQuest = async () => {
+  const handleAddQuest = async () => {
     if (taskInput.trim() === '') return;
-
-    try {
-      const res = await fetch(`${API_URL}/quests/add`, {
-        method: 'POST',
-        headers: getAuthHeaders(),
-        body: JSON.stringify({ title: taskInput, type: taskType }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setTaskInput('');
-        fetchQuests();
-      }
-    } catch (err) {
-      console.error('Failed to add quest:', err);
-    }
+    await dispatch(addQuest({ title: taskInput, type: taskType }));
+    setTaskInput('');
   };
 
-  const completeQuest = async (id: number) => {
-    try {
-      const res = await fetch(`${API_URL}/quests/complete/${id}`, {
-        method: 'POST',
-        headers: getAuthHeaders(),
-      });
-      const data = await res.json();
-      if (data.success) {
-        fetchQuests();
-      }
-    } catch (err) {
-      console.error('Failed to complete quest:', err);
-    }
-  };
-
-  const deleteQuest = async (id: number) => {
-    try {
-      const res = await fetch(`${API_URL}/quests/delete/${id}`, {
-        method: 'DELETE',
-        headers: getAuthHeaders(),
-      });
-      const data = await res.json();
-      if (data.success) {
-        fetchQuests();
-      }
-    } catch (err) {
-      console.error('Failed to delete quest:', err);
-    }
-  };
-
-  const completedCount = taskList.filter((t) => t.completed).length;
+  const completedCount = quests.filter((t) => t.completed).length;
 
   return (
     <SoftCard className='flex flex-col p-4 gap-6'>
@@ -103,7 +39,7 @@ const DailyQuests = () => {
             Daily Quests
           </h2>
           <p className='text-sm text-muted mt-1'>
-            {completedCount}/{taskList.length} completed
+            {completedCount}/{quests.length} completed
           </p>
         </div>
         <TaskToggle onSwitchList={(option) => setListType(option as TaskFilter)} />
@@ -114,7 +50,7 @@ const DailyQuests = () => {
           value={taskInput}
           placeholder="Add a new quest...."
           onChange={(e) => setTaskInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && addQuest()}
+          onKeyDown={(e) => e.key === 'Enter' && handleAddQuest()}
           className='flex-grow'
         />
         <div className='flex items-center gap-2'>
@@ -125,7 +61,7 @@ const DailyQuests = () => {
             <Briefcase size={20} />
           </div>
         </div>
-        <div className='p-3 rounded bg-primary cursor-pointer' onClick={addQuest}>
+        <div className='p-3 rounded bg-primary cursor-pointer' onClick={handleAddQuest}>
           <Plus size={20}/>
         </div>
       </div>
@@ -142,8 +78,8 @@ const DailyQuests = () => {
               type={task.type}
               completed={task.completed}
               xpReward={task.xp_reward}
-              onComplete={() => completeQuest(task.id)}
-              onDelete={() => deleteQuest(task.id)}
+              onComplete={() => dispatch(completeQuest(task.id))}
+              onDelete={() => dispatch(deleteQuest(task.id))}
             />
           ))
         )}

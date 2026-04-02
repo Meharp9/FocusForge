@@ -5,12 +5,13 @@ import Button from '@/components/common/Button'
 import { Sparkles } from 'lucide-react'
 import BannerIllustration from '@/components/landing/BannerIllustration'
 import { useRouter } from 'next/navigation'
+import { useAppSelector } from '@/store/hooks'
 
 const Hero = () => {
   const router = useRouter();
+  const token = useAppSelector((state) => state.auth.token);
 
   const handleStartForging = () => {
-    const token = localStorage.getItem("access_token");
     router.push(token ? "/dashboard" : "/auth");
   }
 
