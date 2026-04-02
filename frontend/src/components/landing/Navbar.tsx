@@ -10,7 +10,8 @@ const Navbar = () => {
   const router = useRouter();
 
   const handleGetStarted = () => {
-    router.push("/auth");
+    const token = localStorage.getItem("access_token");
+    router.push(token ? "/dashboard" : "/auth");
   }
 
   return (

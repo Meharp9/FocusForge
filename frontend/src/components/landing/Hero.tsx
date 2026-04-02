@@ -1,9 +1,19 @@
+'use client';
+
 import React from 'react'
 import Button from '@/components/common/Button'
 import { Sparkles } from 'lucide-react'
 import BannerIllustration from '@/components/landing/BannerIllustration'
+import { useRouter } from 'next/navigation'
 
 const Hero = () => {
+  const router = useRouter();
+
+  const handleStartForging = () => {
+    const token = localStorage.getItem("access_token");
+    router.push(token ? "/dashboard" : "/auth");
+  }
+
   return (
     <div className='flex flex-col lg:flex-row px-6 sm:px-8 md:px-12 lg:px-20 xl:px-32 mt-8 md:mt-12 lg:mt-20 mb-6 md:mb-8 lg:mb-10 justify-between items-center gap-8 lg:gap-0'>
       <div className='w-full lg:w-[45%] flex flex-col gap-4 md:gap-5 lg:gap-6'>
@@ -26,6 +36,7 @@ const Hero = () => {
             btnText='Start Forging'
             className='py-2 md:py-2.5'
             showArrow={true}
+            onClick={handleStartForging}
           />
         </div>
       </div>

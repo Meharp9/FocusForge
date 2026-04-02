@@ -1,8 +1,18 @@
+'use client';
+
 import React from 'react'
 import Card from '@/components/common/Card'
 import Button from '@/components/common/Button'
+import { useRouter } from 'next/navigation'
 
 const CTA = () => {
+  const router = useRouter();
+
+  const handleGetStarted = () => {
+    const token = localStorage.getItem("access_token");
+    router.push(token ? "/dashboard" : "/auth");
+  }
+
   return (
     <div className='flex items-center justify-center mb-12 md:mb-16 lg:mb-20 px-6'>
       <Card className='px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-6 md:py-8 lg:py-10 flex flex-col items-center gap-3'>
@@ -22,6 +32,7 @@ const CTA = () => {
           btnText='Get Started Free'
           className='text-white py-2 md:py-2.5 mt-3 md:mt-4 lg:mt-6'
           showArrow={true}
+          onClick={handleGetStarted}
         />
       </Card>
     </div>
