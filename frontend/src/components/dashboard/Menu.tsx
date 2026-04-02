@@ -21,7 +21,7 @@ const Menu = () => {
           label={item.label}
           icon={item.icon}
           isActive={isActive}
-          onClick={() => router.push(`/dashboard/${tabName}`)}
+          onClick={() => router.push(tabName === 'overview' ? '/dashboard' : `/dashboard/${tabName}`)}
         />
       })}
     </div>
