@@ -8,9 +8,10 @@ interface InputFieldProps {
   placeholder?: string;
   className?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-const InputField = ({ label, type, value, placeholder, className, onChange }: InputFieldProps) => {
+const InputField = ({ label, type, value, placeholder, className, onChange, onKeyDown }: InputFieldProps) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const isPasswordType = type === 'password';
   return (
@@ -21,7 +22,8 @@ const InputField = ({ label, type, value, placeholder, className, onChange }: In
           type={isPasswordType && !showPassword ? 'password' : 'text'}
           value={value} 
           placeholder={placeholder} 
-          onChange={onChange} 
+          onChange={onChange}
+          onKeyDown={onKeyDown}
           className='border border-border focus:border-transparent rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-primary transition bg-input w-full pr-10' 
         />
         {isPasswordType && (

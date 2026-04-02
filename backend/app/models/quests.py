@@ -6,6 +6,7 @@ class Quest(Base):
     __tablename__ = "quests"
 
     id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, nullable=False, index=True)
     title = Column(String)
     description = Column(String, nullable=True)
     xp_reward = Column(Integer, default=10)
