@@ -46,6 +46,27 @@ export const fetchProfileApi = async () => {
   return data.profile;
 };
 
+// Pomodoro APIs
+export const fetchSessionsApi = async () => {
+  const res = await fetch(`${API_URL}/pomodoro/sessions`, {
+    headers: getAuthHeaders(),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to fetch sessions.');
+  return data;
+};
+
+export const completeSessionApi = async (duration: number = 25) => {
+  const res = await fetch(`${API_URL}/pomodoro/complete`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify({ duration }),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to log session.');
+  return data;
+};
+
 // Quest APIs
 export const fetchQuestsApi = async () => {
   const res = await fetch(`${API_URL}/quests/list`, {
