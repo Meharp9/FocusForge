@@ -49,19 +49,31 @@ def list_quests(db: Session = Depends(get_db), current_user: User = Depends(get_
     }
 
 @router.post("/complete/{quest_id}")
-def complete_quest(quest_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+def toggle_quest(quest_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
   try:
     quest = db.query(Quest).filter(Quest.id == quest_id, Quest.user_id == current_user.id).first()
     if not quest:
       raise HTTPException(status_code=404, detail="Quest not found")
 
-    quest.completed = True
+    quest.completed = not quest.completed
+
+    if quest.completed:
+      current_user.xp_earned += quest.xp_reward
+    else:
+      current_user.xp_earned = max(0, current_user.xp_earned - quest.xp_reward)
+
+    # Level up check
+    while current_user.xp_earned >= current_user.level * 100:
+      current_user.xp_earned -= current_user.level * 100
+      current_user.level += 1
+
     db.commit()
-    db.refresh(quest)
 
     return {
       "success": True,
-      "message": "Quest marked as completed"
+      "completed": quest.completed,
+      "xp_earned": current_user.xp_earned,
+      "level": current_user.level
     }
   except Exception as e:
     return {
