@@ -98,6 +98,47 @@ export const deleteTimeBlockApi = async (id: number) => {
   return data;
 };
 
+// Habit APIs
+export const fetchHabitsApi = async () => {
+  const res = await fetch(`${API_URL}/habits/list`, {
+    headers: getAuthHeaders(),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to fetch habits.');
+  return data.habits;
+};
+
+export const addHabitApi = async (title: string) => {
+  const res = await fetch(`${API_URL}/habits/add`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify({ title }),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to add habit.');
+  return data;
+};
+
+export const toggleHabitApi = async (id: number) => {
+  const res = await fetch(`${API_URL}/habits/complete/${id}`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to toggle habit.');
+  return data;
+};
+
+export const deleteHabitApi = async (id: number) => {
+  const res = await fetch(`${API_URL}/habits/delete/${id}`, {
+    method: 'DELETE',
+    headers: getAuthHeaders(),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to delete habit.');
+  return data;
+};
+
 // Quest APIs
 export const fetchQuestsApi = async () => {
   const res = await fetch(`${API_URL}/quests/list`, {

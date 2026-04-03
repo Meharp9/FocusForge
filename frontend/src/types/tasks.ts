@@ -12,4 +12,6 @@ export type TaskFilter = 'all' | 'personal' | 'work';
 export interface Habit {
   id: number;
   title: string;
+  completed_today: boolean;
+  streak: number;
 }

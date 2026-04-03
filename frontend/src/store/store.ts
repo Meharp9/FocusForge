@@ -3,6 +3,7 @@ import authReducer from './slices/authSlice';
 import questReducer from './slices/questSlice';
 import pomodoroReducer from './slices/pomodoroSlice';
 import timeBlockReducer from './slices/timeBlockSlice';
+import habitReducer from './slices/habitSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     quests: questReducer,
     pomodoro: pomodoroReducer,
     timeBlocks: timeBlockReducer,
+    habits: habitReducer,
   },
 });
 
