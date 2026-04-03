@@ -67,6 +67,37 @@ export const completeSessionApi = async (duration: number = 25) => {
   return data;
 };
 
+// Time Block APIs
+export const fetchTimeBlocksApi = async () => {
+  const res = await fetch(`${API_URL}/time-blocks/list`, {
+    headers: getAuthHeaders(),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to fetch time blocks.');
+  return data.blocks;
+};
+
+export const addTimeBlockApi = async (title: string, start_time: string, end_time: string, category: string) => {
+  const res = await fetch(`${API_URL}/time-blocks/add`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify({ title, start_time, end_time, category }),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to add time block.');
+  return data;
+};
+
+export const deleteTimeBlockApi = async (id: number) => {
+  const res = await fetch(`${API_URL}/time-blocks/delete/${id}`, {
+    method: 'DELETE',
+    headers: getAuthHeaders(),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to delete time block.');
+  return data;
+};
+
 // Quest APIs
 export const fetchQuestsApi = async () => {
   const res = await fetch(`${API_URL}/quests/list`, {

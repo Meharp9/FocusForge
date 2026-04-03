@@ -9,6 +9,7 @@ from app.models import user, quests, habits, pomodoro, time_blocks, achievements
 from app.routes import user as user_routes
 from app.routes import quests as quest_routes
 from app.routes import pomodoro as pomodoro_routes
+from app.routes import time_blocks as time_block_routes
 
 app = FastAPI(title="FocusForge")
 
@@ -36,6 +37,7 @@ with Session(engine) as db:
 app.include_router(user_routes.router)
 app.include_router(quest_routes.router)
 app.include_router(pomodoro_routes.router)
+app.include_router(time_block_routes.router)
 
 @app.get("/")
 def root():
