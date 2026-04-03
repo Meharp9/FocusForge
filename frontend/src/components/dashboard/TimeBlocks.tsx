@@ -6,6 +6,7 @@ import InputField from '@/components/common/InputField'
 import { Clock, Plus, Trash2 } from 'lucide-react'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { fetchTimeBlocks, addTimeBlock, deleteTimeBlock } from '@/store/slices/timeBlockSlice'
+import { formatTimeForApi, addDuration, calcBlockDuration } from '@/utils'
 
 const COLORS = [
   { name: 'amber', bg: 'bg-amber-700/30', border: 'border-amber-600', text: 'text-amber-400' },
@@ -22,27 +23,6 @@ const HOURS = Array.from({ length: 24 }, (_, i) => {
 });
 
 const DURATIONS = ['0.5h', '1h', '1.5h', '2h', '2.5h', '3h'];
-
-const formatTimeForApi = (hourLabel: string): string => {
-  const [num, ampm] = hourLabel.split(' ');
-  return `${num}:00${ampm}`;
-};
-
-const addDuration = (hourLabel: string, duration: string): string => {
-  const [num, ampm] = hourLabel.split(' ');
-  let hour24 = parseInt(num);
-  if (ampm === 'PM' && hour24 !== 12) hour24 += 12;
-  if (ampm === 'AM' && hour24 === 12) hour24 = 0;
-
-  const durationHours = parseFloat(duration);
-  const totalMinutes = hour24 * 60 + durationHours * 60;
-  const endHour24 = Math.floor(totalMinutes / 60) % 24;
-  const endMin = totalMinutes % 60;
-
-  const endHour12 = endHour24 % 12 || 12;
-  const endAmpm = endHour24 < 12 ? 'AM' : 'PM';
-  return `${endHour12}:${endMin.toString().padStart(2, '0')}${endAmpm}`;
-};
 
 const TimeBlocks = () => {
   const dispatch = useAppDispatch();
@@ -153,6 +133,7 @@ const TimeBlocks = () => {
         ) : (
           blocks.map((block) => {
             const color = getColorForCategory(block.category);
+            const blockDuration = calcBlockDuration(block.start_time, block.end_time);
             return (
               <div
                 key={block.id}
@@ -166,7 +147,7 @@ const TimeBlocks = () => {
                   <span className='font-medium'>{block.title}</span>
                 </div>
                 <div className='flex items-center gap-3'>
-                  <span className='text-sm text-muted'>{duration}</span>
+                  <span className='text-sm text-muted'>{blockDuration}</span>
                   <button
                     onClick={() => dispatch(deleteTimeBlock(block.id))}
                     className='text-muted hover:text-red-500 cursor-pointer'

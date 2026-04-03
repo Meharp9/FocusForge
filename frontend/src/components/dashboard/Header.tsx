@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import ThemeToggle from '@/components/ThemeToggle';
 import LevelTag from '@/components/common/LevelTag';
-import { toTitleCase } from '@/utils/formatting';
+import { toTitleCase } from '@/utils';
 import { useAppSelector } from '@/store/hooks';
 
 const Header = () => {

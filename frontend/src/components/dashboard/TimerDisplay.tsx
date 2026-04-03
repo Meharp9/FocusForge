@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatTime } from '@/utils/formatting';
+import { formatTime } from '@/utils';
 
 interface TimerDisplayProps {
   secondsLeft: number;
