@@ -129,14 +129,15 @@ export const addHabitApi = async (title: string, goal_value: number, unit: strin
   return data;
 };
 
-export const toggleHabitApi = async (id: number, date?: string) => {
-  const url = date
-    ? `${API_URL}/habits/complete/${id}?log_date=${date}`
-    : `${API_URL}/habits/complete/${id}`;
-  const res = await fetch(url, { method: 'POST', headers: getAuthHeaders() });
+export const logHabitApi = async (id: number, value: number, date?: string) => {
+  const res = await fetch(`${API_URL}/habits/log/${id}`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify({ value, log_date: date }),
+  });
   handleUnauthorized(res);
   const data = await res.json();
-  if (!data.success) throw new Error(data.error || 'Failed to toggle habit.');
+  if (!data.success) throw new Error(data.error || 'Failed to log habit.');
   return data;
 };
 

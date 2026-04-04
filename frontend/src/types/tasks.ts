@@ -9,11 +9,12 @@ export interface Task {
 
 export type TaskFilter = 'all' | 'personal' | 'work';
 
-export type HabitDayStatus = 'completed' | 'missed' | 'pending' | 'inactive';
+export type HabitDayStatus = 'completed' | 'partial' | 'missed' | 'pending' | 'inactive';
 
 export interface HabitWeekDay {
   date: string;
   status: HabitDayStatus;
+  value: number;
 }
 
 export interface Habit {

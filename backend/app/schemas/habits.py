@@ -8,3 +8,7 @@ class HabitCreate(BaseModel):
     unit: str = "times/day"
     start_date: date
     end_date: Optional[date] = None
+
+class HabitLog(BaseModel):
+    value: int
+    log_date: Optional[str] = None

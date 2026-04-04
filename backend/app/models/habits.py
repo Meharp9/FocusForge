@@ -21,6 +21,7 @@ class HabitCompletion(Base):
     id = Column(Integer, primary_key=True, index=True)
     habit_id = Column(Integer, ForeignKey("habits.id", ondelete="CASCADE"), nullable=False, index=True)
     completed_at = Column(Date, default=date.today, nullable=False)
+    value = Column(Integer, nullable=False, default=1)
 
     __table_args__ = (
         UniqueConstraint("habit_id", "completed_at", name="uq_habit_completion_per_day"),

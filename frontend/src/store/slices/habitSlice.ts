@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchHabitsApi, addHabitApi, toggleHabitApi, deleteHabitApi } from '@/lib/api';
+import { fetchHabitsApi, addHabitApi, logHabitApi, deleteHabitApi } from '@/lib/api';
 import { updateXp } from './authSlice';
-import { Habit } from '@/types/tasks';
+import { Habit, HabitDayStatus } from '@/types/tasks';
 
 interface HabitState {
   habits: Habit[];
@@ -35,17 +35,23 @@ export const addHabit = createAsyncThunk(
   }
 );
 
-export const toggleHabit = createAsyncThunk(
-  'habits/toggle',
-  async ({ id, date }: { id: number; date: string }, { dispatch }) => {
-    dispatch(optimisticToggle({ id, date }));
+interface LogHabitPayload {
+  id: number;
+  date: string;
+  value: number;
+  goalValue: number;
+}
+
+export const logHabit = createAsyncThunk(
+  'habits/log',
+  async ({ id, date, value, goalValue }: LogHabitPayload, { dispatch }) => {
+    dispatch(optimisticLog({ id, date, value, goalValue }));
     try {
-      const data = await toggleHabitApi(id, date);
+      const data = await logHabitApi(id, value, date);
       dispatch(updateXp({ xp_earned: data.xp_earned, level: data.level }));
       dispatch(fetchHabits());
     } catch {
-      dispatch(optimisticToggle({ id, date }));
-      dispatch(fetchHabits());
+      dispatch(fetchHabits()); // revert by re-fetching
     }
   }
 );
@@ -62,21 +68,26 @@ const habitSlice = createSlice({
   name: 'habits',
   initialState,
   reducers: {
-    optimisticToggle(state, action: { payload: { id: number; date: string } }) {
-      const { id, date } = action.payload;
+    optimisticLog(state, action: { payload: LogHabitPayload }) {
+      const { id, date, value, goalValue } = action.payload;
       const habit = state.habits.find((h) => h.id === id);
       if (!habit) return;
-      const todayStr = new Date().toISOString().split('T')[0];
+      const todayStr = new Date().toLocaleDateString('en-CA');
       const day = habit.week?.find((d) => d.date === date);
       if (day) {
-        if (day.status === 'completed') {
-          day.status = date < todayStr ? 'missed' : 'pending';
+        day.value = value;
+        let status: HabitDayStatus;
+        if (value <= 0) {
+          status = date < todayStr ? 'missed' : 'pending';
+        } else if (value >= goalValue) {
+          status = 'completed';
         } else {
-          day.status = 'completed';
+          status = 'partial';
         }
+        day.status = status;
       }
       if (date === todayStr) {
-        habit.completed_today = !habit.completed_today;
+        habit.completed_today = value >= goalValue;
       }
     },
   },
@@ -97,5 +108,5 @@ const habitSlice = createSlice({
   },
 });
 
-export const { optimisticToggle } = habitSlice.actions;
+export const { optimisticLog } = habitSlice.actions;
 export default habitSlice.reducer;

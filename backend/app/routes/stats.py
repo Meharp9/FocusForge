@@ -25,7 +25,6 @@ def get_overview(
 ):
     start, end = date_range(period)
 
-    # Quests completed in period (created_at is used as a proxy)
     quests_completed = db.query(Quest).filter(
         Quest.user_id == current_user.id,
         Quest.completed == True,
@@ -41,6 +40,7 @@ def get_overview(
     ).all()
     quest_xp = sum(q.xp_reward for q in quest_xp_rows)
 
+    # Only count completions where value >= goal_value (fully completed)
     habit_completions_count = (
         db.query(HabitCompletion)
         .join(Habit, HabitCompletion.habit_id == Habit.id)
@@ -48,6 +48,7 @@ def get_overview(
             Habit.user_id == current_user.id,
             HabitCompletion.completed_at >= start,
             HabitCompletion.completed_at <= end,
+            HabitCompletion.value >= Habit.goal_value,
         )
         .count()
     )
@@ -65,7 +66,7 @@ def get_overview(
     habits = db.query(Habit).filter(Habit.user_id == current_user.id).all()
     habit_streaks = []
     for h in habits:
-        streak = get_streak(h.id, db)
+        streak = get_streak(h.id, h.goal_value, db)  # pass goal_value
         if streak > 0:
             habit_streaks.append({"id": h.id, "title": h.title, "streak": streak})
     habit_streaks.sort(key=lambda x: x["streak"], reverse=True)
@@ -111,7 +112,9 @@ def get_habit_heatmap(
         HabitCompletion.completed_at >= start,
         HabitCompletion.completed_at <= end,
     ).all()
-    completed_dates = {c.completed_at for c in completions}
+
+    # Map date → logged value
+    value_by_date = {c.completed_at: c.value for c in completions}
 
     today = date.today()
     grid = []
@@ -120,11 +123,13 @@ def get_habit_heatmap(
         is_active = habit.start_date <= current and (
             habit.end_date is None or habit.end_date >= current
         )
-        is_completed = current in completed_dates
+        val = value_by_date.get(current, 0)
         if not is_active:
             status = "inactive"
-        elif is_completed:
+        elif val >= habit.goal_value:
             status = "completed"
+        elif val > 0:
+            status = "partial"
         elif current > today:
             status = "future"
         else:

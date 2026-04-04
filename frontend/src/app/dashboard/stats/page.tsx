@@ -15,13 +15,14 @@ const PERIODS = [
 
 const DAY_LABELS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-type GridDay = { date: string; status: 'completed' | 'missed' | 'inactive' | 'future' };
+type GridDay = { date: string; status: 'completed' | 'partial' | 'missed' | 'inactive' | 'future' };
 type HabitStreak = { id: number; title: string; streak: number };
 type HabitOption = { id: number; title: string };
 
 const cellColor = (status: GridDay['status']) => {
   switch (status) {
     case 'completed': return 'bg-green-500 dark:bg-green-500';
+    case 'partial':   return 'bg-green-300 dark:bg-green-800';
     case 'missed':    return 'bg-green-100 dark:bg-green-900';
     default:          return 'bg-gray-200 dark:bg-[#161b22]';
   }
@@ -234,10 +235,10 @@ export default function StatsPage() {
             {/* Legend */}
             <div className='flex items-center justify-end gap-2 mt-3 text-xs text-muted'>
               <span>Less</span>
-              <div className='w-3 h-3 rounded-sm bg-gray-200 dark:bg-[#161b22]' />
-              <div className='w-3 h-3 rounded-sm bg-green-100 dark:bg-green-900' />
-              <div className='w-3 h-3 rounded-sm bg-green-300 dark:bg-green-600' />
-              <div className='w-3 h-3 rounded-sm bg-green-500 dark:bg-green-500' />
+              <div className='w-3 h-3 rounded-sm bg-gray-200 dark:bg-[#161b22]' title='None' />
+              <div className='w-3 h-3 rounded-sm bg-green-100 dark:bg-green-900' title='Missed' />
+              <div className='w-3 h-3 rounded-sm bg-green-300 dark:bg-green-800' title='Partial' />
+              <div className='w-3 h-3 rounded-sm bg-green-500 dark:bg-green-500' title='Completed' />
               <span>More</span>
             </div>
           </div>
