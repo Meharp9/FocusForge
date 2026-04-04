@@ -4,13 +4,14 @@ from sqlalchemy.orm import Session
 from app.core.database import engine, Base
 
 # Import all models so Base.metadata.create_all picks them up
-from app.models import user, quests, habits, pomodoro, time_blocks, achievements  # noqa: F401
+from app.models import user, quests, habits, pomodoro, time_blocks  # noqa: F401
 
 from app.routes import user as user_routes
 from app.routes import quests as quest_routes
 from app.routes import pomodoro as pomodoro_routes
 from app.routes import time_blocks as time_block_routes
 from app.routes import habits as habit_routes
+from app.routes import stats as stats_routes
 
 app = FastAPI(title="FocusForge")
 
@@ -40,6 +41,7 @@ app.include_router(quest_routes.router)
 app.include_router(pomodoro_routes.router)
 app.include_router(time_block_routes.router)
 app.include_router(habit_routes.router)
+app.include_router(stats_routes.router)
 
 @app.get("/")
 def root():

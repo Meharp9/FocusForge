@@ -1,4 +1,4 @@
-import { Calendar, ChartColumn, Clock, Flame, LayoutDashboard, Target, Trophy } from 'lucide-react';
+import { Calendar, ChartColumn, Clock, Flame, LayoutDashboard, Target } from 'lucide-react';
 
 export const MENU_ITEMS = [
   {
@@ -25,8 +25,4 @@ export const MENU_ITEMS = [
     label: 'Stats',
     icon: <ChartColumn size={18} />
   },
-  {
-    label: 'Achievements',
-    icon: <Trophy size={18} />
-  }
 ];

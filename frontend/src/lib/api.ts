@@ -9,6 +9,16 @@ const getAuthHeaders = (): Record<string, string> => {
   return headers;
 };
 
+const handleUnauthorized = (res: Response) => {
+  if (res.status === 401 || res.status === 403) {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('access_token');
+      window.location.href = '/auth';
+    }
+    throw new Error('Session expired. Please sign in again.');
+  }
+};
+
 // Auth APIs
 export const signUpApi = async (email: string, password: string) => {
   const res = await fetch(`${API_URL}/user/signup`, {
@@ -38,9 +48,8 @@ export const signInApi = async (email: string, password: string) => {
 
 // Profile APIs
 export const fetchProfileApi = async () => {
-  const res = await fetch(`${API_URL}/user/profile`, {
-    headers: getAuthHeaders(),
-  });
+  const res = await fetch(`${API_URL}/user/profile`, { headers: getAuthHeaders() });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to fetch profile.');
   return data.profile;
@@ -48,9 +57,8 @@ export const fetchProfileApi = async () => {
 
 // Pomodoro APIs
 export const fetchSessionsApi = async () => {
-  const res = await fetch(`${API_URL}/pomodoro/sessions`, {
-    headers: getAuthHeaders(),
-  });
+  const res = await fetch(`${API_URL}/pomodoro/sessions`, { headers: getAuthHeaders() });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to fetch sessions.');
   return data;
@@ -62,6 +70,7 @@ export const completeSessionApi = async (duration: number = 25) => {
     headers: getAuthHeaders(),
     body: JSON.stringify({ duration }),
   });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to log session.');
   return data;
@@ -69,9 +78,8 @@ export const completeSessionApi = async (duration: number = 25) => {
 
 // Time Block APIs
 export const fetchTimeBlocksApi = async () => {
-  const res = await fetch(`${API_URL}/time-blocks/list`, {
-    headers: getAuthHeaders(),
-  });
+  const res = await fetch(`${API_URL}/time-blocks/list`, { headers: getAuthHeaders() });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to fetch time blocks.');
   return data.blocks;
@@ -83,6 +91,7 @@ export const addTimeBlockApi = async (title: string, start_time: string, end_tim
     headers: getAuthHeaders(),
     body: JSON.stringify({ title, start_time, end_time, category }),
   });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to add time block.');
   return data;
@@ -93,6 +102,7 @@ export const deleteTimeBlockApi = async (id: number) => {
     method: 'DELETE',
     headers: getAuthHeaders(),
   });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to delete time block.');
   return data;
@@ -100,9 +110,8 @@ export const deleteTimeBlockApi = async (id: number) => {
 
 // Habit APIs
 export const fetchHabitsApi = async () => {
-  const res = await fetch(`${API_URL}/habits/list`, {
-    headers: getAuthHeaders(),
-  });
+  const res = await fetch(`${API_URL}/habits/list`, { headers: getAuthHeaders() });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to fetch habits.');
   return data.habits;
@@ -114,6 +123,7 @@ export const addHabitApi = async (title: string, goal_value: number, unit: strin
     headers: getAuthHeaders(),
     body: JSON.stringify({ title, goal_value, unit, start_date, end_date }),
   });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to add habit.');
   return data;
@@ -123,10 +133,8 @@ export const toggleHabitApi = async (id: number, date?: string) => {
   const url = date
     ? `${API_URL}/habits/complete/${id}?log_date=${date}`
     : `${API_URL}/habits/complete/${id}`;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: getAuthHeaders(),
-  });
+  const res = await fetch(url, { method: 'POST', headers: getAuthHeaders() });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to toggle habit.');
   return data;
@@ -137,16 +145,41 @@ export const deleteHabitApi = async (id: number) => {
     method: 'DELETE',
     headers: getAuthHeaders(),
   });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to delete habit.');
   return data;
 };
 
+// Stats APIs
+export const fetchStatsOverviewApi = async (period: number) => {
+  const res = await fetch(`${API_URL}/stats/overview?period=${period}`, { headers: getAuthHeaders() });
+  handleUnauthorized(res);
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to fetch stats.');
+  return data;
+};
+
+export const fetchStatsHabitsApi = async () => {
+  const res = await fetch(`${API_URL}/stats/habits`, { headers: getAuthHeaders() });
+  handleUnauthorized(res);
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to fetch habits.');
+  return data.habits;
+};
+
+export const fetchHabitHeatmapApi = async (habit_id: number, period: number) => {
+  const res = await fetch(`${API_URL}/stats/habit-heatmap?habit_id=${habit_id}&period=${period}`, { headers: getAuthHeaders() });
+  handleUnauthorized(res);
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Failed to fetch heatmap.');
+  return data.grid;
+};
+
 // Quest APIs
 export const fetchQuestsApi = async () => {
-  const res = await fetch(`${API_URL}/quests/list`, {
-    headers: getAuthHeaders(),
-  });
+  const res = await fetch(`${API_URL}/quests/list`, { headers: getAuthHeaders() });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to fetch quests.');
   return data.quests;
@@ -158,6 +191,7 @@ export const addQuestApi = async (title: string, type: string) => {
     headers: getAuthHeaders(),
     body: JSON.stringify({ title, type }),
   });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to add quest.');
   return data;
@@ -168,6 +202,7 @@ export const completeQuestApi = async (id: number) => {
     method: 'POST',
     headers: getAuthHeaders(),
   });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to complete quest.');
   return data;
@@ -178,6 +213,7 @@ export const deleteQuestApi = async (id: number) => {
     method: 'DELETE',
     headers: getAuthHeaders(),
   });
+  handleUnauthorized(res);
   const data = await res.json();
   if (!data.success) throw new Error(data.error || 'Failed to delete quest.');
   return data;
