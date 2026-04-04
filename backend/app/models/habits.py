@@ -8,6 +8,10 @@ class Habit(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     title = Column(String, nullable=False)
+    goal_value = Column(Integer, nullable=False, default=1)
+    unit = Column(String, nullable=False, default="times/day")
+    start_date = Column(Date, nullable=False, default=date.today)
+    end_date = Column(Date, nullable=True)
     created_at = Column(Date, default=date.today)
 
 

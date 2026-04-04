@@ -18,8 +18,8 @@ const InputField = ({ label, type, value, placeholder, className, onChange, onKe
     <div className={`flex flex-col gap-1 relative ${className}`}>
       {label && <label>{label}</label>}
       <div className='relative'>
-        <input 
-          type={isPasswordType && !showPassword ? 'password' : 'text'}
+        <input
+          type={isPasswordType ? (showPassword ? 'text' : 'password') : type}
           value={value} 
           placeholder={placeholder} 
           onChange={onChange}
