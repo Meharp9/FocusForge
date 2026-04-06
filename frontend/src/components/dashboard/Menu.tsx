@@ -1,10 +1,14 @@
 'use client';
 
-import MenuItem from '@/components/dashboard/MenuItem'
+import MenuItem from '@/components/dashboard/MenuItem';
 import { useRouter, usePathname } from 'next/navigation';
 import { MENU_ITEMS } from '@/constants/menu';
 
-const Menu = () => {
+interface MenuProps {
+  onNavigate?: () => void;
+}
+
+const Menu = ({ onNavigate }: MenuProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const match = pathname.match(/^\/dashboard\/(.+)$/);
@@ -16,16 +20,21 @@ const Menu = () => {
         const tabName = item.label.toLowerCase().replace(/\s/g, '-');
         const isActive = activeTab === tabName;
 
-        return <MenuItem
-          key={item.label}
-          label={item.label}
-          icon={item.icon}
-          isActive={isActive}
-          onClick={() => router.push(tabName === 'overview' ? '/dashboard' : `/dashboard/${tabName}`)}
-        />
+        return (
+          <MenuItem
+            key={item.label}
+            label={item.label}
+            icon={item.icon}
+            isActive={isActive}
+            onClick={() => {
+              router.push(tabName === 'overview' ? '/dashboard' : `/dashboard/${tabName}`);
+              onNavigate?.();
+            }}
+          />
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

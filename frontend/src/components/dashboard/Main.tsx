@@ -25,22 +25,22 @@ const Main = () => {
   ];
 
   return (
-    <div className='flex flex-col gap-4 p-6'>
+    <div className='flex flex-col gap-4'>
       <XPTracker />
 
-      <div className='grid grid-cols-2 gap-4'>
+      <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
         {statCards.map((card) => (
           <SoftCard key={card.label} className='p-4 flex flex-col gap-2'>
             <div className='flex items-center gap-2 text-primary text-sm'>
               {card.icon}
-              <span>{card.label}</span>
+              <span className='text-xs sm:text-sm'>{card.label}</span>
             </div>
-            <p className='text-3xl font-bold'>{card.value}</p>
+            <p className='text-2xl sm:text-3xl font-bold'>{card.value}</p>
           </SoftCard>
         ))}
       </div>
 
-      <div className='grid grid-cols-2 gap-4'>
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
         <DailyQuests />
         <HabitTracker />
       </div>

@@ -96,18 +96,18 @@ const TimeBlocks = () => {
             <Plus size={20} />
           </div>
         </div>
-        <div className='flex items-center gap-3'>
+        <div className='flex flex-wrap items-center gap-3'>
           <select
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
-            className='bg-input border border-border rounded-2xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer'
+            className='bg-input border border-border rounded-2xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer flex-1 min-w-[100px]'
           >
             {HOURS.map((h) => <option key={h} value={h}>{h}</option>)}
           </select>
           <select
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
-            className='bg-input border border-border rounded-2xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer'
+            className='bg-input border border-border rounded-2xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer flex-1 min-w-[80px]'
           >
             {DURATIONS.map((d) => <option key={d} value={d}>{d}</option>)}
           </select>

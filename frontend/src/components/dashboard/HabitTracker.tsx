@@ -200,13 +200,13 @@ const HabitTracker = () => {
           <InputField type='text' value={title} placeholder='Habit name...'
             onChange={(e) => setTitle(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleAdd()} />
-          <div className='flex gap-3'>
-            <div className='flex flex-col gap-1'>
+          <div className='flex flex-wrap gap-3'>
+            <div className='flex flex-col gap-1 w-20'>
               <label className='text-xs text-muted'>Goal</label>
               <InputField type='number' value={goalValue} placeholder='1'
-                onChange={(e) => setGoalValue(e.target.value)} className='w-20' />
+                onChange={(e) => setGoalValue(e.target.value)} />
             </div>
-            <div className='flex flex-col gap-1 flex-1'>
+            <div className='flex flex-col gap-1 flex-1 min-w-[140px]'>
               <label className='text-xs text-muted'>Unit</label>
               <select value={unitPreset} onChange={(e) => setUnitPreset(e.target.value)}
                 className='bg-background border border-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-primary'>
@@ -214,14 +214,14 @@ const HabitTracker = () => {
               </select>
             </div>
             {unitPreset === 'custom' && (
-              <div className='flex flex-col gap-1 flex-1'>
+              <div className='flex flex-col gap-1 flex-1 min-w-[140px]'>
                 <label className='text-xs text-muted'>Custom unit</label>
                 <InputField type='text' value={customUnit} placeholder='e.g. pushups/session'
                   onChange={(e) => setCustomUnit(e.target.value)} />
               </div>
             )}
           </div>
-          <div className='flex gap-3'>
+          <div className='flex flex-col sm:flex-row gap-3'>
             <div className='flex flex-col gap-1 flex-1'>
               <label className='text-xs text-muted'>Start date</label>
               <InputField type='date' value={startDate} onChange={(e) => setStartDate(e.target.value)} />
