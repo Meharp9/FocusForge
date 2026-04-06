@@ -94,7 +94,7 @@ export default function StatsPage() {
   const monthLabels = getMonthLabels(weeks);
 
   return (
-    <div className='flex flex-col gap-6 p-6'>
+    <div className='flex flex-col gap-6'>
       {/* XP Tracker */}
       <XPTracker />
 
@@ -113,7 +113,7 @@ export default function StatsPage() {
       </div>
 
       {/* Stat Cards */}
-      <div className='grid grid-cols-3 gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
         <SoftCard className='p-5 flex flex-col gap-2'>
           <div className='flex items-center gap-2 text-muted'>
             <Target size={16} />
