@@ -6,8 +6,8 @@
       "framework": "nextjs" 
     },
     "backend": { 
-      "entrypoint": "backend",
-      "routePrefix": "/api" 
+      "entrypoint": "backend/app",
+      "routePrefix": "/api"
     }
   },
   "rewrites": [
