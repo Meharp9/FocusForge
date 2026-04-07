@@ -15,12 +15,16 @@ export default function Auth() {
   }
 
   return (
-    <div className='bg-background flex'>
-      <AuthBanner />
-      {showSignUp ?
-        <SignUp onToggle={() => setShowSignUp(false)} onBack={goBackToHome} /> :
-        <SignIn onToggle={() => setShowSignUp(true)} onBack={goBackToHome} />
-      }
+    <div className='bg-background flex min-h-screen'>
+      <div className='hidden md:block md:w-1/2'>
+        <AuthBanner />
+      </div>
+      <div className='w-full md:w-1/2'>
+        {showSignUp ?
+          <SignUp onToggle={() => setShowSignUp(false)} onBack={goBackToHome} /> :
+          <SignIn onToggle={() => setShowSignUp(true)} onBack={goBackToHome} />
+        }
+      </div>
     </div>
   )
 }

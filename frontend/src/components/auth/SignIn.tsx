@@ -9,7 +9,7 @@ interface SignInProps {
 
 const SignIn = ({ onToggle, onBack }: SignInProps) => {
   return (
-    <div className='w-[50%] p-8 flex flex-col items-center'>
+    <div className='w-full h-screen p-6 md:p-8 flex flex-col items-center'>
       <div className='flex items-center justify-between w-full'>
         <div className='flex gap-1 items-center' onClick={onBack}>
           <ArrowLeft size={18}/>

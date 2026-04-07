@@ -19,7 +19,7 @@ const authStats = [
 
 const AuthBanner = () => {
   return (
-    <div className='bg-primary w-[50%] h-screen p-12 flex flex-col justify-between'>
+    <div className='bg-primary w-full h-screen p-12 flex flex-col justify-between'>
       <Logo light={true}/>
       <div className='flex flex-col gap-4 w-[70%]'>
         <h2 className='text-4xl lg:text-5xl font-black text-white'>
